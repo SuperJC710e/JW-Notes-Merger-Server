@@ -2,11 +2,11 @@
 
 Simple server using [Express](https://expressjs.com/) and [Node.js](https://nodejs.org/) for merging JW Library's notes, bookmarks and markup.
 
-# Pre-requisites
+## Pre-requisites
 
 - Install [Node.js](https://nodejs.org/en/) version 15 or higher
 
-# Getting started
+## Getting started
 
 - Clone the repository
 
@@ -67,23 +67,23 @@ To stop and remove the container, run the following:
 docker stop jw-notes-merger-server && docker rm -f jw-notes-merger-server
 ```
 
-# Endpoints
+## Endpoints
 
-    - /merge-db
-        - POST
-        - Merge 2 notes files into 1
-        - Accepts 2 notes files with .jwlibrary extension
-        - Returns a File with the following properties:
-            - name: merged
-            - extension: .jwlibrary
-        - Example error:
-            - 400 Bad Request
-                - `{ "message": "Two valid files are required" }`
-                - `{ "message": "Only .jwlibrary files are allowed" }`
-            - 500 Internal Server Error
-                - `{ "message": "Unexpected error" }`
+- /merge-db
+  - POST
+  - Merge 2 notes files into 1
+  - Accepts 2 notes files with .jwlibrary extension
+  - Returns a File with the following properties:
+    - name: merged
+    - extension: .jwlibrary
+  - Example error:
+    - 400 Bad Request
+      - `{ "message": "Two valid files are required" }`
+      - `{ "message": "Only .jwlibrary files are allowed" }`
+    - 500 Internal Server Error
+      - `{ "message": "Unexpected error" }`
 
-# Production Environment
+## Production Environment
 
 - Server
 
