@@ -8,7 +8,8 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install; \
+RUN rm -rf yarn.lock; \
+    npm install; \
     npm run build
 
 # Container
