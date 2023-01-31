@@ -17,6 +17,9 @@ FROM node:18
 ARG TINI_VERSION
 ARG API_PORT
 
+# ENV TINI_VERSION=${TINI_VERSION}
+ENV API_PORT=${API_PORT}
+
 WORKDIR /app
 
 # Add Tini
@@ -26,13 +29,13 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 
 RUN chmod +x /tini
 
-COPY --from=builder /app/dist/. .
-
-ENV API_PORT=${API_PORT}
+COPY --from=builder --chown=root:root /app/dist /app/dist
+COPY --from=builder --chown=root:root /app/node_modules /app/node_modules
+# COPY --from=builder --chown=root:root /app/package.json /app/
 
 EXPOSE ${API_PORT}
 
 # ENTRYPOINT ["node", "dist/server.js"]
 ENTRYPOINT ["/tini", "--"]
 
-CMD ["node", "server.js"]
+CMD ["node", "dist/server.js"]
