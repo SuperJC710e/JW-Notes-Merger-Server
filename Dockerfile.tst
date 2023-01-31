@@ -30,9 +30,9 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 
 RUN chmod +x /tini
 
-COPY --from=builder --chown=root:root /app/dist /app/dist
-COPY --from=builder --chown=root:root /app/node_modules /app/node_modules
-# COPY --from=builder --chown=root:root /app/package.json /app/
+COPY --from=builder --chown=node:node /app/dist /app/dist
+COPY --from=builder --chown=node:node /app/node_modules /app/node_modules
+# COPY --from=builder --chown=node:node /app/package.json /app/
 
 EXPOSE ${API_PORT}
 
@@ -40,3 +40,5 @@ EXPOSE ${API_PORT}
 ENTRYPOINT ["/tini", "--"]
 
 CMD ["node", "dist/server.js"]
+
+USER node
